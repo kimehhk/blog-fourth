@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contents %}
+<head>   
+    <style>
+        @font-face { 
+            font-family: 'S-CoreDream-3Light'; 
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') 
+            format('woff'); 
+            font-weight: normal; 
+            font-style: normal; 
+        }
+        body {
+            text-align: center;
+            font-family: 'S-CoreDream-3Light';
+        }
+        #street {
+            height: 500;
+            border-style: solid;
+            border-color: grey
+        }
+        .box {
+            border-style: dashed;
+            border-width: 5px;
+            border-color: rgb(61, 61, 63);
+            border-radius: 5px 25px 25px 100px;
+            padding: 20px;
+            margin: 30px 80px;
+            background-color: rgb(130, 136, 146); 
+        }
+        h1 {
+            color: whitesmoke;
+            text-align: center;
+            font-weight: 800;
+        }
+        p {
+            color: whitesmoke;
+        }
+        .date {
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    <br> <br>
+    <img src="{% static 'street.jpg' %}" id="street"> <br><br>
+    {% for blog in comments.all%}
+    <br>
+    <div class="box">
+        <br>
+        <h1>{{blog.title}}</h1>        
+        <br>
+        {% if blog.image %}
+        <img src="{{blog.image.url}}" height="200">
+        {% endif %} <br>
+        <p class="date">{{blog.pub_date}}</p>
+        <br>
+        <p class="text">{{blog.summary}}</p><p><a href="{%url 'detail' blog.id%}">...more</p>
+        <br>
+    </div>
+    <br>
+    {%endfor%}        
+</body>
+{% endblock %}
